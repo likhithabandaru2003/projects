@@ -35,23 +35,23 @@ const getWeather=async (city)=>
         loc.textContent=name;
         climate.textContent=main;
         tempvalue.textContent=Math.round(feels_like-273);
-        if(id<300 && id>200)
+        if(id>=200 && id < 300)
         {
             tempicon.src="https://raw.githubusercontent.com/likhithabandaru2003/weather-app/main/images/thunderstorm.png"
         }
-       else  if(id<400 && id>300)
+       else  if(id>=300 && id<400)
         {
             tempicon.src="https://raw.githubusercontent.com/likhithabandaru2003/weather-app/main/images/clouds.png"
         }
-       else if(id<600&& id>500)
+       else if(id>=500&& id<600)
         {
             tempicon.src="https://raw.githubusercontent.com/likhithabandaru2003/weather-app/main/images/rains.png"
         }
-       else  if(id<700 && id>600)
+       else  if(id>=600 && id<700)
         {
             tempicon.src="https://raw.githubusercontent.com/likhithabandaru2003/weather-app/main/images/snow.png"
         }
-       else  if(id<800 && id>700)
+       else  if(id>=700 && id<800)
         {
             tempicon.src="https://raw.githubusercontent.com/likhithabandaru2003/weather-app/main/images/clouds.png"
         }
@@ -125,23 +125,23 @@ if(navigator.geolocation)
                     loc.textContent=name;
                     climate.textContent=main;
                     tempvalue.textContent=Math.round(feels_like-273);
-                    if(id<300 && id>200)
+                    if(id>=200 && id < 300)
                     {
                         tempicon.src="https://raw.githubusercontent.com/likhithabandaru2003/weather-app/main/images/thunderstorm.png"
                     }
-                   else  if(id<400 && id>300)
+                   else  if(id>=300 && id<400)
                     {
                         tempicon.src="https://raw.githubusercontent.com/likhithabandaru2003/weather-app/main/images/clouds.png"
                     }
-                   else if(id<600&& id>500)
+                   else if(id>=500&& id<600)
                     {
                         tempicon.src="https://raw.githubusercontent.com/likhithabandaru2003/weather-app/main/images/rains.png"
                     }
-                   else  if(id<700 && id>600)
+                   else  if(id>=600 && id<700)
                     {
                         tempicon.src="https://raw.githubusercontent.com/likhithabandaru2003/weather-app/main/images/snow.png"
                     }
-                   else  if(id<800 && id>700)
+                   else  if(id>=700 && id<800)
                     {
                         tempicon.src="https://raw.githubusercontent.com/likhithabandaru2003/weather-app/main/images/clouds.png"
                     }
