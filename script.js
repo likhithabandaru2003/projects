@@ -37,27 +37,27 @@ const getWeather=async (city)=>
         tempvalue.textContent=Math.round(feels_like-273);
         if(id<300 && id>200)
         {
-            tempicon.src="/images/thunderstorm.svg"
+            tempicon.src="/images/thunderstorm.png"
         }
        else  if(id<400 && id>300)
         {
-            tempicon.src="/images/clouds.svg"
+            tempicon.src="/images/clouds.png"
         }
        else if(id<600&& id>500)
         {
-            tempicon.src="/images/rains.svg"
+            tempicon.src="/images/rains.png"
         }
        else  if(id<700 && id>600)
         {
-            tempicon.src="/images/snow.svg"
+            tempicon.src="/images/snow.png"
         }
        else  if(id<800 && id>700)
         {
-            tempicon.src="/images/clouds.svg"
+            tempicon.src="/images/clouds.png"
         }
          else if(id==800)
         {
-            tempicon.src="/images/clouds.svg"
+            tempicon.src="/images/clouds.png"
         }
 
 
@@ -127,27 +127,27 @@ if(navigator.geolocation)
                     tempvalue.textContent=Math.round(feels_like-273);
                     if(id<300 && id>200)
                     {
-                        tempicon.src="/images/thunderstorm.svg"
+                        tempicon.src="/images/thunderstorm.png"
                     }
                    else  if(id<400 && id>300)
                     {
-                        tempicon.src="/images/clouds.svg"
+                        tempicon.src="/images/clouds.png"
                     }
                    else if(id<600&& id>500)
                     {
-                        tempicon.src="/images/rains.svg"
+                        tempicon.src="/images/rains.png"
                     }
                    else  if(id<700 && id>600)
                     {
-                        tempicon.src="/images/snow.svg"
+                        tempicon.src="/images/snow.png"
                     }
                    else  if(id<800 && id>700)
                     {
-                        tempicon.src="/images/clouds.svg"
+                        tempicon.src="/images/clouds.png"
                     }
                      else if(id==800)
                     {
-                        tempicon.src="/images/clouds.svg"
+                        tempicon.src="/images/clouds.png"
                     }
 
 
