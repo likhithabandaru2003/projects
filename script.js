@@ -1,171 +1,54 @@
-let loc =document.getElementById("location");
-let tempicon=document.getElementById("temp-icon");
-let tempvalue=document.getElementById("temp-value");
-let climate =document.getElementById("climate");
+let loc = document.getElementById("location");
+let tempicon = document.getElementById("temp-icon");
+let tempvalue = document.getElementById("temp-value");
+let climate = document.getElementById("climate");
 let iconfile;
-const searchInput=document.getElementById("search-input");
-const searchButton=document.getElementById("search-button");
+const searchInput = document.getElementById("search-input");
+const searchButton = document.getElementById("search-button");
 
-searchButton.addEventListener('click', (e)=>
-{
-
-e.preventDefault();
-getWeather(searchInput.value);
-searchInput.value='';
-
-
+searchButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  getWeather(searchInput.value);
+  searchInput.value = "";
 });
 
+const getWeather = async (city) => {
+  try {
+    const response = await fetch(`http://localhost:3000/weather?city=${city}`, {
+      mode: "cors",
+    });
 
-
-const getWeather=async (city)=>
-{
-    try{
-
-        const response= await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=dab3af44de7d24ae7ff86549334e45bd`,
-   
-            {mode: 'cors'}
-        );
-
-        const weatherData= await response.json();
-        console.log(weatherData);
-        const{name}=weatherData;
-        const{feels_like}=weatherData.main;
-        const{id,main}=weatherData.weather[0];
-        loc.textContent=name;
-        climate.textContent=main;
-        tempvalue.textContent=Math.round(feels_like-273);
-        if(id>=200 && id < 300)
-        {
-            tempicon.src="https://raw.githubusercontent.com/likhithabandaru2003/weather-app/main/images/thunderstorm.png"
-        }
-       else  if(id>=300 && id<400)
-        {
-            tempicon.src="https://raw.githubusercontent.com/likhithabandaru2003/weather-app/main/images/clouds.png"
-        }
-       else if(id>=500&& id<600)
-        {
-            tempicon.src="https://raw.githubusercontent.com/likhithabandaru2003/weather-app/main/images/rains.png"
-        }
-       else  if(id>=600 && id<700)
-        {
-            tempicon.src="https://raw.githubusercontent.com/likhithabandaru2003/weather-app/main/images/snow.png"
-        }
-       else  if(id>=700 && id<800)
-        {
-            tempicon.src="https://raw.githubusercontent.com/likhithabandaru2003/weather-app/main/images/clouds.png"
-        }
-         else if(id==800)
-        {
-            tempicon.src="https://raw.githubusercontent.com/likhithabandaru2003/weather-app/main/images/clouds.png"
-        }
-
-
-
-   
-    }
-catch(error)
-{
-    alert('city not found');
-}
-
-
-
-
-
+    const weatherData = await response.json();
+    console.log(weatherData);
+    loc.textContent = weatherData.city;
+    climate.textContent = weatherData.climate;
+    tempvalue.textContent = weatherData.tempvalue;
+    tempicon.src = weatherData.iconfile;
+  } catch (error) {
+    console.log(error);
+    alert("city not found");
+  }
 };
 
+window.addEventListener("load", () => {
+  let long;
+  let lat;
 
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(async (position) => {
+      long = position.coords.longitude;
+      lat = position.coords.latitude;
+      const response = await fetch(
+        `http://localhost:3000/latlon?lat=${lat}&lon=${long}`,
+        { mode: "cors" }
+      );
 
-
-
-
-
-
-
-
-
-
-
-
-window.addEventListener("load" ,()=>{
-
-let long;
-let lat;
-
-if(navigator.geolocation)
-{
-
-    navigator.geolocation.getCurrentPosition((position)=>
-    {
-
-   
-    
-    long=position.coords.longitude;
-    lat=position.coords.latitude;
-    const proxy="https://cors-anywhere.herokuapp.com/";
-
-        const api=`${proxy}api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=9c25d71309f799febed483efc24e0b5a	`
-
-        fetch(api).then((response)=>{
-
-            return response.json();
-
-
-        })
-
-        .then (data =>
-            {
-
-                    const{name}=data;
-                    const{feels_like}=data.main;
-                    const{id,main}=data.weather[0];
-
-
-                    loc.textContent=name;
-                    climate.textContent=main;
-                    tempvalue.textContent=Math.round(feels_like-273);
-                    if(id>=200 && id < 300)
-                    {
-                        tempicon.src="https://raw.githubusercontent.com/likhithabandaru2003/weather-app/main/images/thunderstorm.png"
-                    }
-                   else  if(id>=300 && id<400)
-                    {
-                        tempicon.src="https://raw.githubusercontent.com/likhithabandaru2003/weather-app/main/images/clouds.png"
-                    }
-                   else if(id>=500&& id<600)
-                    {
-                        tempicon.src="https://raw.githubusercontent.com/likhithabandaru2003/weather-app/main/images/rains.png"
-                    }
-                   else  if(id>=600 && id<700)
-                    {
-                        tempicon.src="https://raw.githubusercontent.com/likhithabandaru2003/weather-app/main/images/snow.png"
-                    }
-                   else  if(id>=700 && id<800)
-                    {
-                        tempicon.src="https://raw.githubusercontent.com/likhithabandaru2003/weather-app/main/images/clouds.png"
-                    }
-                     else if(id==800)
-                    {
-                        tempicon.src="https://raw.githubusercontent.com/likhithabandaru2003/weather-app/main/images/clouds.png"
-                    }
-
-
-
-
-
-                    console.log(data);
-
-
-            })
-
-
-
-}
-    
-    
-    
-    )}
-
-
-})
+      const weatherData = await response.json();
+      console.log(weatherData);
+      loc.textContent = weatherData.city;
+      climate.textContent = weatherData.climate;
+      tempvalue.textContent = weatherData.tempvalue;
+      tempicon.src = weatherData.iconfile;
+    });
+  }
+});
