@@ -1,6 +1,8 @@
+/* eslint-disable require-jsdoc */
 const functions = require("firebase-functions");
 const randomstring = require("randomstring");
 const axios = require("axios");
+
 function middleware(request) {
   const reqIp = request.ip;
   const reqId = `REQ_${randomstring.generate(7)}`;
@@ -8,7 +10,8 @@ function middleware(request) {
   request.reqId = reqId;
   return request;
 }
-exports.helloWorld = functions.https.onRequest(async (request, response) => {
+
+exports.weather = functions.https.onRequest(async (request, response) => {
   response.set("Access-Control-Allow-Origin", "*");
   response.set("Access-Control-Allow-Methods", "GET, POST");
   functions.logger.info("Hello logs!", {structuredData: true});
@@ -28,7 +31,6 @@ exports.helloWorld = functions.https.onRequest(async (request, response) => {
 
     let tempicon;
     const id = weatherData.weather[0].id;
-    console.log("id", id);
     if (id >= 200 && id < 300) {
       tempicon = "thunderstorm.png";
     } else if (id >= 300 && id < 400) {
@@ -51,7 +53,7 @@ exports.helloWorld = functions.https.onRequest(async (request, response) => {
     };
     response.send(data);
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
     response.send(error.message);
   }
 });

@@ -14,7 +14,7 @@ searchButton.addEventListener("click", (e) => {
 
 const getWeather = async (city) => {
   try {
-    const response = await fetch(`https://us-central1-weather-app-likhitha.cloudfunctions.net/helloWorld?city=${city}`, {
+    const response = await fetch(`https://us-central1-weather-app-likhitha.cloudfunctions.net/weather?city=${city}`, {
       mode: "cors",
     });
 
@@ -40,7 +40,7 @@ window.addEventListener("load", () => {
       long = position.coords.longitude;
       lat = position.coords.latitude;
       const response = await fetch(
-        `https://us-central1-weather-app-likhitha.cloudfunctions.net/helloWorld?lat=${lat}&lon=${long}`,
+        `https://us-central1-weather-app-likhitha.cloudfunctions.net/weather?lat=${lat}&lon=${long}`,
         { mode: "cors" }
       );
 
