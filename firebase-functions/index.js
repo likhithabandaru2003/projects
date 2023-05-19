@@ -1,12 +1,19 @@
 const functions = require("firebase-functions");
-
+const randomstring = require("randomstring");
 const axios = require("axios");
+function middleware(request) {
+  const reqIp = request.ip;
+  const reqId = `REQ_${randomstring.generate(7)}`;
+  console.log(`Request: ${reqId} | ${reqIp}`);
+  request.reqId = reqId;
+  return request;
+}
 exports.helloWorld = functions.https.onRequest(async (request, response) => {
   response.set("Access-Control-Allow-Origin", "*");
   response.set("Access-Control-Allow-Methods", "GET, POST");
   functions.logger.info("Hello logs!", {structuredData: true});
   const city = request.query.city;
-
+  request = middleware(request);
   try {
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=9c25d71309f799febed483efc24e0b5a`;
     if (!city) {
